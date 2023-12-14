@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { FormRow, FormRowSelect } from "../../components";
 import Wrapper from "../../assets/wrappers/DashboardFormPage";
 import { useSelector, useDispatch } from "react-redux";
@@ -6,8 +7,8 @@ import {
   clearValues,
   handleChange,
   createJob,
+  editJob,
 } from "../../features/job/jobSlice";
-import { useEffect } from "react";
 
 const AddJob = () => {
   const {
@@ -34,6 +35,23 @@ const AddJob = () => {
       toast.error("Please Fill Out All Fields");
       return;
     }
+
+    if (isEditing) {
+      dispatch(
+        editJob({
+          jobId: editJobId,
+          job: {
+            position,
+            company,
+            jobLocation,
+            jobType,
+            status,
+          },
+        })
+      );
+      return;
+    }
+
     dispatch(
       createJob({
         company,
@@ -51,7 +69,6 @@ const AddJob = () => {
   };
 
   useEffect(() => {
-    // eventually will check for isEditing
     if (!isEditing) {
       dispatch(handleChange({ name: "jobLocation", value: user.location }));
     }
