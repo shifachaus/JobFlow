@@ -7,8 +7,6 @@ const PageBtnContainer = () => {
   const { numOfPages, page } = useSelector((store) => store.allJobs);
   const dispatch = useDispatch();
 
-  console.log(page);
-
   const pages = Array.from({ length: numOfPages }, (_, index) => {
     return index + 1;
   });
