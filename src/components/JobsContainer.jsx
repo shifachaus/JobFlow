@@ -13,8 +13,6 @@ const JobsContainer = () => {
     dispatch(getAllJobs());
   }, []);
 
-  console.log(jobs);
-
   if (isLoading) {
     return <Loading center />;
   }
